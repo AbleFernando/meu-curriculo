@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernando Souza - Engenheiro de Software & Gestor de Projetos</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --text-dark: #2d3748;
+            --text-light: #4a5568;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .cv-wrapper {
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid rgba(255,255,255,0.3);
+            box-shadow: var(--shadow);
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+        }
+
+        .header-info h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #ffffff, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-info .title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .contact-item i {
+            font-size: 1.1rem;
+        }
+
+        .objective {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .main-content {
+            padding: 3rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            color: var(--text-dark);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-card {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .highlight-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .highlight-card h3 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .experience-item:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .company-info h3 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .company-info .position {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0.25rem 0;
+        }
+
+        .company-info .location {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .period {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .achievements {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .achievements li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .achievements li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 0.8rem;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .skill-category h4 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+        }
+
+        .education-item, .lang-item {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .education-item:hover, .lang-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .footer-section {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .footer-section h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .awards, .soft-skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .award-tag, .soft-skill-tag {
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .header-info h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-info {
+                justify-content: center;
+            }
+
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+        }
+
+        .action-buttons {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .action-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            border: none;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .action-button:hover {
+            transform: scale(1.1);
+        }
+
+        .action-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .download-button {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+        }
+
+        .download-button:hover {
+            background: linear-gradient(135deg, #38a169, #2f855a);
+        }
+
+        /* Tooltip styles */
+        .action-button::before {
+            content: attr(title);
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            pointer-events: none;
+        }
+
+        .action-button::after {
+            content: '';
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 6px solid transparent;
+            border-left-color: rgba(0,0,0,0.8);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            margin-right: 4px;
+        }
+
+        .action-button:hover::before,
+        .action-button:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media print {
+            .action-buttons { display: none; }
+            .cv-wrapper { box-shadow: none; }
+            body { background: white; }
+        }
+
+        @media (max-width: 768px) {
+            .action-buttons {
+                bottom: 1rem;
+                right: 1rem;
+            }
+            
+            .action-button::before,
+            .action-button::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cv-wrapper">
+            <!-- Header Section -->
+            <header class="header">
+                <div class="header-content">
+                    <img src="https://media.licdn.com/dms/image/v2/C4D03AQFKSy5W…eta&t=K1uIdGie0DSiAGiatHmbspz0fxxhQQzPeZrXbYIPz8g" alt="Fernando Souza" class="profile-photo">
+                    
+                    <div class="header-info">
+                        <h1>Fernando Souza</h1>
+                        <p class="title">Engenheiro de Software & Gestor de Projetos</p>
+                        
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Rio de Janeiro, Brasil</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>fernandomv.souza@gmail.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+55 21 97016-8900</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-linkedin"></i>
+                                <span>LinkedIn</span>
+                            </div>
+                        </div>
+                        
+                        <div class="objective">
+                            <p><strong>Objetivo Profissional:</strong> Engenheiro de Software e Gestor de Projetos com 16+ anos de experiência, especializado em Java, Flutter e metodologias ágeis. Busco oportunidades para liderar equipes multidisciplinares, entregando soluções tecnológicas que otimizem processos e gerem valor para clientes globais. Aberto à relocação (Portugal/Europa).</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Principais Destaques -->
+                <section class="section">
+                    <h2 class="section-title">Principais Destaques</h2>
+                    <div class="highlights-grid">
+                        <div class="highlight-card">
+                            <h3><i class="fas fa-users"></i> Liderança de Equipes</h3>
+                            <p>Coordenação de <strong>12+ profissionais</strong> em projetos internacionais, com gestão de prazos, forecast e alinhamento de expectativas.</p>
+                        </div>
+                        <div class="highlight-card">
+                            <h3><i class="fas fa-project-diagram"></i> Gestão de Projetos</h3>
+                            <p>Experiência em <strong>Scrum (A-CSPO)</strong>, forecast de demandas, e comunicação com stakeholders (clientes e lideranças).</p>
+                        </div>
+                        <div class="highlight-card">
+                            <h3><i class="fas fa-chart-line"></i> Resultados Mensuráveis</h3>
+                            <p>Redução de <strong>40% em custos operacionais</strong> via automações em Java; aumento de eficiência em entregas.</p>
+                        </div>
+                        <div class="highlight-card">
+                            <h3><i class="fas fa-code"></i> Habilidades Técnicas</h3>
+                            <p>Java, Flutter, Dart, Power BI, Oracle DB, e integração de sistemas.</p>
+                        </div>
+                        <div class="highlight-card">
+                            <h3><i class="fas fa-globe"></i> Idiomas</h3>
+                            <p>Português (nativo), Inglês <strong>fluente</strong> (B2+/C1), Espanhol (básico).</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Experiência Profissional -->
+                <section class="section">
+                    <h2 class="section-title">Experiência Profissional</h2>
+                    
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div class="company-info">
+                                <h3>Accenture Brasil</h3>
+                                <div class="position">Software Engineering Consultant & Project Manager</div>
+                                <div class="location">Rio de Janeiro</div>
+                            </div>
+                            <div class="period">Dez 2021 – Presente</div>
+                        </div>
+                        <ul class="achievements">
+                            <li><strong>Gestão de Equipe:</strong> Coordenação de 12 desenvolvedores em projetos para clientes globais</li>
+                            <li><strong>Forecast de demandas</strong> e planejamento de sprints</li>
+                            <li><strong>Alinhamento de expectativas</strong> com clientes e apresentação de status reports</li>
+                            <li><strong>Garantia de prazos</strong> e qualidade das entregas</li>
+                            <li><strong>Desenvolvimento Técnico:</strong> Liderança na criação de soluções em Java e Flutter</li>
+                            <li><strong>Ferramentas:</strong> JIRA, Power BI, Metodologias Ágeis (Scrum/Kanban)</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div class="company-info">
+                                <h3>Accenture Brasil</h3>
+                                <div class="position">Programming Specialist</div>
+                                <div class="location">Rio de Janeiro</div>
+                            </div>
+                            <div class="period">Mar 2019 – Dez 2021</div>
+                        </div>
+                        <ul class="achievements">
+                            <li>Desenvolvimento de <strong>webservices (RESTful/SOAP)</strong> para automação de processos</li>
+                            <li>Redução de custos em <strong>40%</strong> através de automações</li>
+                            <li>Liderança técnica de equipe de 5 desenvolvedores</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Habilidades Técnicas -->
+                <section class="section">
+                    <h2 class="section-title">Habilidades Técnicas</h2>
+                    <div class="skills-container">
+                        <div class="skill-category">
+                            <h4>Linguagens</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">Dart</span>
+                                <span class="skill-tag">SQL</span>
+                                <span class="skill-tag">JavaScript</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Frameworks</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Flutter</span>
+                                <span class="skill-tag">Hibernate</span>
+                                <span class="skill-tag">PrimeFaces</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Gestão</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Scrum (A-CSPO)</span>
+                                <span class="skill-tag">ITIL V3</span>
+                                <span class="skill-tag">Forecast</span>
+                                <span class="skill-tag">Power BI</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Ferramentas</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Git</span>
+                                <span class="skill-tag">Oracle DB</span>
+                                <span class="skill-tag">Selenium</span>
+                                <span class="skill-tag">JIRA</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Educação -->
+                <section class="section">
+                    <h2 class="section-title">Educação & Certificações</h2>
+                    <div class="education-item">
+                        <h4><i class="fas fa-graduation-cap"></i> MBA em Gestão de Projetos</h4>
+                        <p>Universidade Veiga de Almeida</p>
+                    </div>
+                    <div class="education-item">
+                        <h4><i class="fas fa-certificate"></i> Certificação A-CSPO</h4>
+                        <p>Agile Certified Scrum Product Owner</p>
+                    </div>
+                    <div class="education-item">
+                        <h4><i class="fas fa-certificate"></i> Building Apps with Flutter</h4>
+                        <p>Udemy/Coursera</p>
+                    </div>
+                </section>
+
+                <!-- Idiomas -->
+                <section class="section">
+                    <h2 class="section-title">Idiomas</h2>
+                    <div class="lang-item">
+                        <h4><i class="fas fa-flag"></i> Português</h4>
+                        <p>Nativo</p>
+                    </div>
+                    <div class="lang-item">
+                        <h4><i class="fas fa-flag"></i> Inglês</h4>
+                        <p>Fluente (entrevistas técnicas, documentação)</p>
+                    </div>
+                    <div class="lang-item">
+                        <h4><i class="fas fa-flag"></i> Espanhol</h4>
+                        <p>Básico</p>
+                    </div>
+                </section>
+
+                <!-- Outras Informações -->
+                <section class="section">
+                    <div class="footer-section">
+                        <h4>Informações Adicionais</h4>
+                        <p><strong>Disponibilidade para relocação</strong> (visto e apoio logístico)</p>
+                        
+                        <div class="awards">
+                            <span class="award-tag">🏆 "Colaborando Efetivamente" (Accenture)</span>
+                            <span class="award-tag">🎖️ 15 anos de serviço</span>
+                        </div>
+                        
+                        <h4 style="margin-top: 2rem;">Soft Skills</h4>
+                        <div class="soft-skills">
+                            <span class="soft-skill-tag">Comunicação Clara</span>
+                            <span class="soft-skill-tag">Resolução de Conflitos</span>
+                            <span class="soft-skill-tag">Pensamento Estratégico</span>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <button class="action-button download-button" onclick="downloadPDF()" title="Download PDF">
+            <i class="fas fa-download"></i>
+        </button>
+        <button class="action-button print-button" onclick="window.print()" title="Imprimir CV">
+            <i class="fas fa-print"></i>
+        </button>
+    </div>
+
+    <script>
+        async function downloadPDF() {
+            // Show loading state
+            const downloadBtn = document.querySelector('.download-button');
+            const originalHTML = downloadBtn.innerHTML;
+            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            downloadBtn.disabled = true;
+
+            try {
+                // Hide action buttons temporarily
+                const actionButtons = document.querySelector('.action-buttons');
+                actionButtons.style.display = 'none';
+
+                // Create a new window for PDF generation
+                const printWindow = window.open('', '_blank');
+                const htmlContent = `
+                    <!DOCTYPE html>
+                    <html lang="pt-BR">
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>Fernando Souza - Currículo</title>
+                        <style>
+                            ${document.querySelector('style').innerHTML}
+                            
+                            /* PDF-specific styles */
+                            body { 
+                                background: white !important; 
+                                print-color-adjust: exact;
+                                -webkit-print-color-adjust: exact;
+                            }
+                            .cv-wrapper { 
+                                box-shadow: none !important; 
+                                margin: 0;
+                                animation: none !important;
+                            }
+                            .section {
+                                animation: none !important;
+                                opacity: 1 !important;
+                                transform: none !important;
+                            }
+                            .action-buttons { display: none !important; }
+                            .header::before { display: none !important; }
+                            
+                            /* Ensure colors print correctly */
+                            .header {
+                                background: linear-gradient(135deg, #667eea, #764ba2) !important;
+                                color: white !important;
+                            }
+                            .skill-tag, .period, .award-tag, .soft-skill-tag {
+                                background: linear-gradient(135deg, #667eea, #764ba2) !important;
+                                color: white !important;
+                            }
+                            
+                            @page {
+                                margin: 0.5in;
+                                size: A4;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        ${document.querySelector('.cv-wrapper').outerHTML}
+                    </body>
+                    </html>
+                `;
+
+                printWindow.document.write(htmlContent);
+                printWindow.document.close();
+
+                // Wait for content to load
+                await new Promise(resolve => {
+                    printWindow.onload = resolve;
+                    setTimeout(resolve, 1500); // Fallback timeout
+                });
+
+                // Trigger print dialog which allows saving as PDF
+                printWindow.print();
+                
+                // Close the window after a delay
+                setTimeout(() => {
+                    printWindow.close();
+                }, 1000);
+
+                // Show action buttons again
+                actionButtons.style.display = 'flex';
+
+            } catch (error) {
+                console.error('Erro ao gerar PDF:', error);
+                alert('Erro ao gerar PDF. Tente usar a opção de imprimir e salvar como PDF.');
+                
+                // Show action buttons again
+                document.querySelector('.action-buttons').style.display = 'flex';
+            } finally {
+                // Restore button state
+                downloadBtn.innerHTML = originalHTML;
+                downloadBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
