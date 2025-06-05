@@ -531,7 +531,7 @@
             <!-- Header Section -->
             <header class="header">
                 <div class="header-content">
-                    <img src="https://media.licdn.com/dms/image/v2/C4D03AQFKSy5W…eta&t=K1uIdGie0DSiAGiatHmbspz0fxxhQQzPeZrXbYIPz8g" alt="Fernando Souza" class="profile-photo">
+                    <img src="https://via.placeholder.com/150x150/667eea/ffffff?text=FS" alt="Fernando Souza" class="profile-photo">
                     
                     <div class="header-info">
                         <h1>Fernando Souza</h1>
@@ -552,7 +552,7 @@
                             </div>
                             <div class="contact-item">
                                 <i class="fab fa-linkedin"></i>
-                                <span>LinkedIn</span>
+                                <a href="https://linkedin.com/in/fernandomv-souza" target="_blank" style="color: inherit; text-decoration: none;">LinkedIn</a>
                             </div>
                         </div>
                         
@@ -742,97 +742,116 @@
 
     <script>
         async function downloadPDF() {
-            // Show loading state
             const downloadBtn = document.querySelector('.download-button');
             const originalHTML = downloadBtn.innerHTML;
             downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
             downloadBtn.disabled = true;
 
             try {
-                // Hide action buttons temporarily
-                const actionButtons = document.querySelector('.action-buttons');
-                actionButtons.style.display = 'none';
-
-                // Create a new window for PDF generation
-                const printWindow = window.open('', '_blank');
-                const htmlContent = `
-                    <!DOCTYPE html>
-                    <html lang="pt-BR">
-                    <head>
-                        <meta charset="UTF-8">
-                        <title>Fernando Souza - Currículo</title>
-                        <style>
-                            ${document.querySelector('style').innerHTML}
-                            
-                            /* PDF-specific styles */
-                            body { 
-                                background: white !important; 
-                                print-color-adjust: exact;
-                                -webkit-print-color-adjust: exact;
-                            }
-                            .cv-wrapper { 
-                                box-shadow: none !important; 
-                                margin: 0;
-                                animation: none !important;
-                            }
-                            .section {
-                                animation: none !important;
-                                opacity: 1 !important;
-                                transform: none !important;
-                            }
-                            .action-buttons { display: none !important; }
-                            .header::before { display: none !important; }
-                            
-                            /* Ensure colors print correctly */
-                            .header {
-                                background: linear-gradient(135deg, #667eea, #764ba2) !important;
-                                color: white !important;
-                            }
-                            .skill-tag, .period, .award-tag, .soft-skill-tag {
-                                background: linear-gradient(135deg, #667eea, #764ba2) !important;
-                                color: white !important;
-                            }
-                            
-                            @page {
-                                margin: 0.5in;
-                                size: A4;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        ${document.querySelector('.cv-wrapper').outerHTML}
-                    </body>
-                    </html>
-                `;
-
-                printWindow.document.write(htmlContent);
-                printWindow.document.close();
-
-                // Wait for content to load
-                await new Promise(resolve => {
-                    printWindow.onload = resolve;
-                    setTimeout(resolve, 1500); // Fallback timeout
-                });
-
-                // Trigger print dialog which allows saving as PDF
-                printWindow.print();
+                // Use the browser's print functionality to save as PDF
+                // This is more reliable than trying to generate PDF programmatically
                 
-                // Close the window after a delay
+                // Create optimized print styles
+                const printStyles = document.createElement('style');
+                printStyles.id = 'pdf-print-styles';
+                printStyles.innerHTML = `
+                    @media print {
+                        body {
+                            background: white !important;
+                            -webkit-print-color-adjust: exact;
+                            print-color-adjust: exact;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        
+                        .container {
+                            max-width: none !important;
+                            margin: 0 !important;
+                            padding: 0 !important;
+                        }
+                        
+                        .cv-wrapper {
+                            box-shadow: none !important;
+                            margin: 0 !important;
+                            border-radius: 0 !important;
+                            page-break-inside: avoid;
+                        }
+                        
+                        .action-buttons {
+                            display: none !important;
+                        }
+                        
+                        .header {
+                            background: linear-gradient(135deg, #667eea, #764ba2) !important;
+                            color: white !important;
+                            -webkit-print-color-adjust: exact;
+                            print-color-adjust: exact;
+                            page-break-inside: avoid;
+                        }
+                        
+                        .header::before {
+                            display: none !important;
+                        }
+                        
+                        .section {
+                            animation: none !important;
+                            opacity: 1 !important;
+                            transform: none !important;
+                            page-break-inside: avoid;
+                        }
+                        
+                        .experience-item {
+                            page-break-inside: avoid;
+                            margin-bottom: 1rem !important;
+                        }
+                        
+                        .skill-tag, .period, .award-tag, .soft-skill-tag {
+                            background: linear-gradient(135deg, #667eea, #764ba2) !important;
+                            color: white !important;
+                            -webkit-print-color-adjust: exact;
+                            print-color-adjust: exact;
+                        }
+                        
+                        .highlight-card {
+                            page-break-inside: avoid;
+                        }
+                        
+                        @page {
+                            margin: 0.75in;
+                            size: A4 portrait;
+                        }
+                        
+                        /* Ensure proper spacing */
+                        .main-content {
+                            padding: 1.5rem !important;
+                        }
+                        
+                        .header {
+                            padding: 2rem !important;
+                        }
+                    }
+                `;
+                
+                document.head.appendChild(printStyles);
+                
+                // Show instructions to user
+                alert('🖨️ Para baixar como PDF:\n\n1. Na janela de impressão que abrirá:\n2. Escolha "Salvar como PDF" ou "Microsoft Print to PDF"\n3. Clique em "Salvar"\n\nO arquivo será salvo como "Fernando_Souza_Curriculo.pdf"');
+                
+                // Trigger print
+                window.print();
+                
+                // Clean up
                 setTimeout(() => {
-                    printWindow.close();
-                }, 1000);
-
-                // Show action buttons again
-                actionButtons.style.display = 'flex';
+                    const printStylesElement = document.getElementById('pdf-print-styles');
+                    if (printStylesElement) {
+                        printStylesElement.remove();
+                    }
+                }, 2000);
 
             } catch (error) {
-                console.error('Erro ao gerar PDF:', error);
-                alert('Erro ao gerar PDF. Tente usar a opção de imprimir e salvar como PDF.');
-                
-                // Show action buttons again
-                document.querySelector('.action-buttons').style.display = 'flex';
+                console.error('Erro ao preparar PDF:', error);
+                alert('Use Ctrl+P (ou Cmd+P no Mac) e escolha "Salvar como PDF" para baixar o currículo.');
             } finally {
-                // Restore button state
                 downloadBtn.innerHTML = originalHTML;
                 downloadBtn.disabled = false;
             }
